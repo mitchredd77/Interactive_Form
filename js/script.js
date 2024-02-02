@@ -14,11 +14,25 @@ title.addEventListener("change", (e) => {
 });
 
 //T-Shirt Info Secion
-const color = document.getElementById("color");
-const design = document.getElementById("design");
-color.disabled = true;
-design.addEventListener("change", (e) => {
+const designSelect = document.getElementById("design");
+const colorSelect = document.getElementById("color");
+colorSelect.disabled = true;
+
+designSelect.addEventListener("change", (e) => {
+  const selectedTheme = designSelect.value;
+  const colorOptions =colorSelect.options;
   if (e.target) {
-    color.disabled = false;
+    colorSelect.disabled = false;
+  }
+  // Loop through color options and remove option non-matching data-theme option
+  for (let i = 1; i < colorSelect.options.length; i++) { 
+    const option = colorSelect.options[i];
+    if (option.dataset.theme !== selectedTheme) {
+      option.style.display = "none";
+    } else {
+      option.style.display = "";
+    }
   }
 });
+
+//Activities Section
