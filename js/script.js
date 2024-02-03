@@ -36,3 +36,54 @@ designSelect.addEventListener("change", (e) => {
 });
 
 //Activities Section
+const activities = document.getElementById("activities");
+const activitiesCost = document.getElementById("activities-cost");
+
+activities.addEventListener("change", (e) => {
+   let totalCost = 0;
+   const checkedActivities = document.querySelectorAll('input[type="checkbox"]:checked');
+   for (let i = 0; i < checkedActivities.length; i++) {
+     totalCost += parseInt(checkedActivities[i].dataset.cost)
+   }
+   activitiesCost.textContent = "Total: $" + totalCost;
+});
+
+//Payment Info Section
+const payment = document.getElementById("payment");
+const creditCardFields = document.getElementById("payment").querySelectorAll("input, select");
+// set default value to credit card
+payment.value = "credit-card";
+payment.addEventListener("change", (e) => {
+  if (e.target.value !== "credit-card") {
+     document.querySelector(".expiration-box").style.display = "none";
+     document.querySelector(".cvv-box").style.display = "none";
+     document.querySelector(".year-box").style.display = "none";
+     document.querySelector(".credit-card-box").style.display = "none";
+     document.querySelector(".zip-box")
+  } else {
+     document.querySelector(".expiration-box").style.display = "block";
+     document.querySelector(".cvv-box").style.display = "block";
+     document.querySelector(".year-box").style.display = "block";
+     document.querySelector(".credit-card-box").style.display = "block";
+     document.querySelector(".zip-box").style.display = "block";
+  }
+});
+
+// Form Validation
+const nameInput = document.getElementById("name");
+const emailInput = document.getElementById("email");
+const form = document.querySelector("form");
+form.addEventListener("submit", (e) => {
+  if (nameInput.value.trim() === "") {
+    e.preventDefault();
+    nameInput.nextElementSibling.style.display = "block";
+  }
+  if (!/^[^@]+@[^@.]+\.[a-z]+$/i.test(emailInput.value.trim())) {
+    e.preventDefault();
+    emailInput.nextElementSibling.style.display = "block";
+  }
+  if (document.querySelectorAll('input[type="checkbox"]:checked').length < 1) {
+    e.preventDefault();
+    document.getElementById("activities-hint").style.display = "block";
+  }
+});
