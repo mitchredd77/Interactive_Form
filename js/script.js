@@ -72,18 +72,31 @@ payment.addEventListener("change", (e) => {
 // Form Validation
 const nameInput = document.getElementById("name");
 const emailInput = document.getElementById("email");
+const cardNumberInput = document.getElementById("cc-num");
+const zipCodeInput = document.getElementById("zip");
+const cvvInput = document.getElementById("cvv");
 const form = document.querySelector("form");
+
 form.addEventListener("submit", (e) => {
-  if (nameInput.value.trim() === "") {
-    e.preventDefault();
-    nameInput.nextElementSibling.style.display = "block";
-  }
-  if (!/^[^@]+@[^@.]+\.[a-z]+$/i.test(emailInput.value.trim())) {
-    e.preventDefault();
-    emailInput.nextElementSibling.style.display = "block";
-  }
+  //Function to validate the input fields except for the activites
+  const validator = (inputElement) => {
+    if (inputElement.value.trim() === "") {
+      e.preventDefault();
+      inputElement.parentElement.classList.add("not-valid");
+      inputElement.parentElement.classList.remove("valid");
+      inputElement.nextElementSibling.style.display = "block";
+    }
+  };
+  validator(nameInput);
+  validator(emailInput);
+  validator(cardNumberInput);
+  validator(zipCodeInput);
+  validator(cvvInput);
+
+ // confirms at least one activity is selected
   if (document.querySelectorAll('input[type="checkbox"]:checked').length < 1) {
     e.preventDefault();
     document.getElementById("activities-hint").style.display = "block";
   }
+
 });
