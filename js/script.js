@@ -140,9 +140,11 @@ form.addEventListener("submit", (e) => {
     document.getElementById("activities-hint").style.display = "block";
   }
 });
+// warning if the name field is blank or empty
 nameInput.addEventListener("keyup", (e) => {
   validator(nameInput, isValidName, e);
 });
+//Warning if the field is blank and  warning if it's not formatted correctly
 emailInput.addEventListener("input", (e) => {
   if (emailInput.value === '') {
     emailHint.textContent = "It\'s not advised to not submit an email address";
