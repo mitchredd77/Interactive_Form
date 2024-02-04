@@ -41,10 +41,25 @@ designSelect.addEventListener("change", (e) => {
 //Activities Section
 const activities = document.getElementById("activities");
 const activitiesCost = document.getElementById("activities-cost");
-//Time of activity for validation with others
+const allCheckboxes = document.querySelectorAll('input[type="checkbox"]');
+//focus and blur 
+allCheckboxes.forEach(checkbox => {
+  // Focus event listener
+  checkbox.addEventListener("focus", () => {
+    checkbox.parentElement.classList.add("focus");
+  });
+
+  // Blur event listener
+  checkbox.addEventListener("blur", () => {
+    const focusedLabel = activities.querySelector("label.focus");
+    if (focusedLabel) {
+      focusedLabel.classList.remove("focus");
+    }
+  });
+});
 activities.addEventListener("change", (e) => {
   let totalCost = 0;
-  const allCheckboxes = document.querySelectorAll('input[type="checkbox"]');
+  
   //Loop through all checkboxes and enable all
   allCheckboxes.forEach(checkbox => {
       checkbox.disabled = false; // Reset all checkboxes to enabled
@@ -116,6 +131,8 @@ form.addEventListener("submit", (e) => {
   validator(cardNumberInput, isValidCardNumber, e);
   validator(zipCodeInput, isValidZipCode, e);
   validator(cvvInput, isValidCVV, e);
+  validator(nameInput, isValidName, e);
+  validator(emailInput, isValidEmail, e);
 
  // confirms at least one activity is selected
   if (document.querySelectorAll('input[type="checkbox"]:checked').length < 1) {
