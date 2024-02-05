@@ -160,11 +160,13 @@ const validator = (inputElement, validationFunction, e) => {
   }
 };
 form.addEventListener("submit", (e) => {
-  validator(cardNumberInput, isValidCardNumber, e);
-  validator(zipCodeInput, isValidZipCode, e);
-  validator(cvvInput, isValidCVV, e);
   validator(nameInput, isValidName, e);
   validator(emailInput, isValidEmail, e);
+  if (document.getElementById("payment").value === "credit-card") {
+      validator(cardNumberInput, isValidCardNumber, e);
+      validator(zipCodeInput, isValidZipCode, e);
+      validator(cvvInput, isValidCVV, e);
+  }
 
  // confirms at least one activity is selected
  const allCheckboxes = form.querySelectorAll('input[type=checkbox]');
