@@ -152,6 +152,11 @@ const validator = (inputElement, validationFunction, e) => {
     inputElement.parentElement.classList.add("not-valid");
     inputElement.parentElement.classList.remove("valid");
     inputElement.nextElementSibling.style.display = "block";
+  } else {
+     //Input is valid, remove error styles and hide message
+     inputElement.parentElement.classList.remove("not-valid");
+     inputElement.parentElement.classList.add("valid");  // Optional: Add a valid class
+     inputElement.nextElementSibling.style.display = "none";
   }
 };
 form.addEventListener("submit", (e) => {
@@ -162,15 +167,21 @@ form.addEventListener("submit", (e) => {
   validator(emailInput, isValidEmail, e);
 
  // confirms at least one activity is selected
-
+ const allCheckboxes = form.querySelectorAll('input[type=checkbox]');
  const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked')
  const activitiesHint = document.getElementById('activities-hint');
-  if (checkboxes.length < 1) {
+ allCheckboxes.forEach(checkbox => {
+   if (checkboxes.length < 1) {
     e.preventDefault();
     document.getElementById("activities").classList.add("not-valid")
     document.getElementById("activities").classList.remove("valid")
     activitiesHint.style.display = "block";
+  } else if (checkboxes.length >= 1){
+    document.getElementById("activities").classList.remove("not-valid")
+    document.getElementById("activities").classList.add("valid")
+    activitiesHint.style.display = "none";
   }
+});
 });
 // warning if the name field is blank or empty
 nameInput.addEventListener("keyup", (e) => {
@@ -180,8 +191,7 @@ nameInput.addEventListener("keyup", (e) => {
 emailInput.addEventListener("input", (e) => {
   if (emailInput.value === '') {
     emailHint.textContent = "It\'s not advised to not submit an email address";
-  } else {
-  emailHint.textContent = 'Email address must be formatted correctly';
-  validator(emailInput, isValidEmail, e);
+  } else if (!validator(emailInput, isValidEmail, e)) {
+    emailHint.textContent = "Please enter a valid email address";
   }
   });
