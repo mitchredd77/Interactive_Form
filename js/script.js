@@ -28,13 +28,11 @@ designSelect.addEventListener("change", (e) => {
   for (let i = 1; i < colorOptions.length; i++) {
     const option = colorOptions[i];
     if (option.dataset.theme === selectedTheme) {
-      colorSelect.value = option.value; // Set the color value
-      break; // Exit the loop as soon as a matching color is found
+      colorSelect.value = option.value;
+      break;
     }
   }
-
   colorSelect.disabled = false;
-
   // Show/hide color options based on the selected theme
   for (let i = 1; i < colorSelect.options.length; i++) { 
     const option = colorSelect.options[i];
@@ -54,7 +52,7 @@ const allCheckboxes = document.querySelectorAll('input[type="checkbox"]');
 allCheckboxes.forEach(checkbox => {
   // Focus event listener
   checkbox.addEventListener("focus", () => {
-    checkbox.parentElement.classList.add("focus");
+  checkbox.parentElement.classList.add("focus");
   });
 
   // Blur event listener
