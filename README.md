@@ -1,5 +1,6 @@
 An interactive form with field validation. The form begins with focusing on the "Name"
-field for the user to get started. Next is the Job Role Section, the other job input box
+field for the user to get started. The name input box will display a warning if the user
+attempts to move forward with a blank name. Next is the Job Role Section, the other job input box
 will not appear until "Other" is chosen in the dropdown box. The T-Shirt Section
 will display only the colors available for the chosen design. 
 
