@@ -94,7 +94,7 @@ payment.addEventListener("change", (e) => {
      document.querySelector(".cvv-box").style.display = "none";
      document.querySelector(".year-box").style.display = "none";
      document.querySelector(".credit-card-box").style.display = "none";
-     document.querySelector(".zip-box")
+     document.querySelector(".zip-box").style.display = "none";
   } else {
      document.querySelector(".expiration-box").style.display = "block";
      document.querySelector(".cvv-box").style.display = "block";
